@@ -1,10 +1,8 @@
 import React, { useReducer } from 'react';
+import createDataContext from './createDataContext';
 
 // Context is to help set global state, and to pass down props to super nested components/children
 // Context WRAPS entire App.js in another component, allowing it to pass props down into Apps -> Parent -> Child and any other inner child.
-
-const BlogContext = React.createContext();
-
 
 const blogReducer = (state, action) => {
   switch (action.type) {
@@ -15,18 +13,8 @@ const blogReducer = (state, action) => {
   }
 }
 
-export const BlogProvider = ({ children }) => {
-  const [blogPosts, dispatch] = useReducer(blogReducer, []);
-
-  const addBlogPost = () => {
-    dispatch({ type: 'add_blogpost'})
-  };
-
-  return (
-    <BlogContext.Provider value={{ data: blogPosts, addBlogPost: addBlogPost }}>
-      {children}
-    </BlogContext.Provider>
-  );
+const addBlogPost = () => {
+  dispatch({ type: 'add_blogpost'})
 };
 
-export default BlogContext;
+export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost }, [])
