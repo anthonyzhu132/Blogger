@@ -11,7 +11,7 @@ const blogReducer = (state, action) => {
       return [...state, { 
         id: Math.floor(Math.random() * 9999), 
         title: action.payload.title,
-        contenet: action.payload.content
+        content: action.payload.content
       }
     ];
     default:
@@ -21,7 +21,7 @@ const blogReducer = (state, action) => {
 
 const addBlogPost = (dispatch) => {
   return (title, content, callback) => {
-    dispatch({ type: 'add_blogpost', payload: { title: title, content: content }});
+    dispatch({ type: 'add_blogpost', payload: { title, content }});
     callback();
   };
 };
@@ -32,4 +32,4 @@ const deleteBlogPost = (dispatch) => {
   };
 };
 
-export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost, deleteBlogPost }, [])
+export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost, deleteBlogPost }, [{ id: 1, title: 'test title', content: 'test content' }])
