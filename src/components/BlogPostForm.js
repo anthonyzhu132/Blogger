@@ -21,12 +21,12 @@ const BlogPostForm = ({ onSubmit, initialValues }) => {
 
 
 //Gives default props for BlogPostForm
-BlogPostForm.deafultProps = {
+BlogPostForm.defaultProps = {
   initialValues: {
     title: '',
     content: ''
   }
-}
+};
 
 const styles = StyleSheet.create({
   input: {
